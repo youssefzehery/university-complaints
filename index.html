@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="منظومة تسجيل الشكاوي الطلابية — كلية التجارة جامعة دمياط" />
+  <title>منظومة الشكاوي | كلية التجارة — جامعة دمياط</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/student.css" />
+</head>
+<body>
+
+<!-- ══ NOTIFICATION ══ -->
+<div class="notif" id="notif"></div>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-block">
+      <img src="/images/logo_1.png" alt="طلاب من أجل مصر" class="logo-img" />
+      <div class="logo-text">
+        <div class="logo-name">طلاب من أجل مصر</div>
+        <div class="logo-sub">جامعة دمياط</div>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <h1 class="header-title">منظومة تسجيل الشكاوي الطلابية</h1>
+      <p class="header-subtitle">كلية التجارة — جامعة دمياط</p>
+    </div>
+
+    <div class="logo-block logo-block-reverse">
+      <img src="/images/com_logo.png" alt="كلية التجارة" class="logo-img" />
+      <div class="logo-text logo-text-left">
+        <div class="logo-name">كلية التجارة</div>
+        <div class="logo-sub">جامعة دمياط</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main-content">
+
+  <!-- STEP INDICATOR -->
+  <div class="steps-wrap" id="steps-wrap">
+    <div class="step-item">
+      <div class="step-dot active" id="dot-1">١</div>
+      <div class="step-label">البيانات</div>
+    </div>
+    <div class="step-line" id="line-1"></div>
+    <div class="step-item">
+      <div class="step-dot" id="dot-2">٢</div>
+      <div class="step-label">الشكوى</div>
+    </div>
+    <div class="step-line" id="line-2"></div>
+    <div class="step-item">
+      <div class="step-dot" id="dot-3">٣</div>
+      <div class="step-label">التأكيد</div>
+    </div>
+  </div>
+
+  <!-- ── STEP 1: Student Info ── -->
+  <section class="step-section active" id="step-1">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon blue">👤</div>
+        <div>
+          <h2 class="card-title">بيانات الطالب</h2>
+          <p class="card-sub">ادخل بياناتك الشخصية بشكل صحيح</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group full">
+          <label class="form-label">الاسم الكامل <span class="req">*</span></label>
+          <input type="text" class="form-input" id="st-name" placeholder="الاسم رباعي كامل" autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">رقم الموبايل <span class="req">*</span></label>
+          <input type="tel" class="form-input" id="st-mobile" placeholder="01xxxxxxxxx" autocomplete="tel" dir="ltr" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">كود الطالب <span class="req">*</span></label>
+          <input type="text" class="form-input" id="st-code" placeholder="كود الطالب بالكلية" dir="ltr" />
+        </div>
+        <div class="form-group full">
+          <label class="form-label">الرقم القومي <span class="req">*</span></label>
+          <input type="text" class="form-input" id="st-national" placeholder="14 رقم" maxlength="14" dir="ltr" />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="goToStep2()">التالي ←</button>
+      </div>
+    </div>
+
+    <!-- Track complaint -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon gold">🔍</div>
+        <div>
+          <h2 class="card-title">تتبع شكواك</h2>
+          <p class="card-sub">ادخل رقم شكواك لمعرفة حالتها الحالية</p>
+        </div>
+      </div>
+
+      <div class="search-row">
+        <input type="text" class="form-input" id="track-num" placeholder="مثال: 000001" dir="ltr" />
+        <button class="btn btn-gold" onclick="trackComplaint()">بحث 🔍</button>
+      </div>
+      <div id="track-result"></div>
+    </div>
+  </section>
+
+  <!-- ── STEP 2: Complaint Details ── -->
+  <section class="step-section" id="step-2">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon gold">📝</div>
+        <div>
+          <h2 class="card-title">تفاصيل الشكوى</h2>
+          <p class="card-sub">اشرح مشكلتك بوضوح وتفصيل</p>
+        </div>
+      </div>
+
+      <div class="form-grid single">
+        <div class="form-group">
+          <label class="form-label">نوع الشكوى <span class="req">*</span></label>
+          <select class="form-input" id="comp-type">
+            <option value="general">عامة</option>
+            <option value="academic">أكاديمية</option>
+            <option value="administrative">إدارية</option>
+            <option value="financial">مالية</option>
+            <option value="technical">تقنية</option>
+            <option value="other">أخرى</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">موضوع الشكوى <span class="req">*</span></label>
+          <input type="text" class="form-input" id="comp-subject" placeholder="عنوان مختصر للشكوى" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">تفاصيل الشكوى <span class="req">*</span></label>
+          <textarea class="form-textarea" id="comp-text" placeholder="اكتب شكواك هنا بالتفصيل... (10 أحرف على الأقل)" rows="6"></textarea>
+          <div class="char-count" id="char-count">0 حرف</div>
+        </div>
+      </div>
+
+      <div class="form-actions two">
+        <button class="btn btn-outline" onclick="goToStep1()">← السابق</button>
+        <button class="btn btn-primary" id="submit-btn" onclick="submitComplaint()">
+          <span id="submit-text">تسجيل الشكوى ✓</span>
+          <span id="submit-spinner" class="spinner" style="display:none;"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STEP 3: Success ── -->
+  <section class="step-section" id="step-3">
+    <div class="success-card">
+      <div class="success-icon">✅</div>
+      <h2 class="success-title">تم تسجيل شكواك بنجاح!</h2>
+      <p class="success-desc">تم استلام شكواك وستُراجَع من قِبل إدارة الكلية في أقرب وقت</p>
+
+      <div class="complaint-number-box">
+        <div class="cn-label">رقم شكواك</div>
+        <div class="cn-number" id="success-num">000000</div>
+      </div>
+
+      <p class="success-note">احتفظ بهذا الرقم لمتابعة حالة شكواك في أي وقت</p>
+
+      <div class="success-actions">
+        <button class="btn btn-gold" onclick="resetForm()">تقديم شكوى جديدة ➕</button>
+        <button class="btn btn-outline-white" onclick="goToTrack()">تتبع الشكوى 🔍</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer">
+  <p>© 2024 منظومة الشكاوي الطلابية — كلية التجارة، جامعة دمياط | طلاب من أجل مصر</p>
+</footer>
+
+<script src="/js/student.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: university-complaints
+    env: node
+    region: frankfurt
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DEV_PASSWORD
+        value: dev@2024
+    disk:
+      name: complaints-db
+      mountPath: /data
+      sizeGB: 1
+    healthCheckPath: /
